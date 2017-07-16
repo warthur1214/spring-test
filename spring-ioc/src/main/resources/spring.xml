@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.warthur.spring.ioc"/>
+
+    <!--<bean name="userDao" class="com.warthur.spring.demo.dao.impl.UserDAOImpl"/>-->
+    <!--<bean name="userService" class="com.warthur.spring.demo.service.UserService" init-method="init"-->
+          <!--destroy-method="destroy" />-->
+
+    <util:map id="userMap" scope="prototype" map-class="java.util.HashMap"
+              key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="userName" value="warthur" />
+        <entry key="password" value="12365" />
+    </util:map>
+
+    <util:properties id="properties" scope="prototype" value-type="java.lang.String">
+        <prop key="userName">warthur</prop>
+        <prop key="password">123456</prop>
+    </util:properties>
+
+    <util:list id="list" scope="prototype" value-type="java.lang.String">
+        <value>name</value>
+        <value>age</value>
+        <value>sex</value>
+    </util:list>
+
+</beans>
