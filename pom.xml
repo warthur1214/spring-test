@@ -11,5 +11,6 @@
     <modules>
         <module>spring-aop</module>
         <module>spring-ioc</module>
+        <module>spring-hibernate</module>
     </modules>
 </project>

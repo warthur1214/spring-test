@@ -4,10 +4,10 @@ import com.warthur.spring.hibernate.dao.UserMapper;
 import com.warthur.spring.hibernate.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 
 /**
  * Created by warthur on 17/7/15.
@@ -18,9 +18,12 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
+    // @Transactional
     public void saveUser(User user) {
         System.out.println("******************");
         userMapper.addUser(user);
+
+        throw new RuntimeException("error transaction rollback");
     }
 
     @PostConstruct

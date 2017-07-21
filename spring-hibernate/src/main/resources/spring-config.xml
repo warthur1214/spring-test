@@ -4,6 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context
@@ -11,7 +12,9 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util.xsd
                            http://www.springframework.org/schema/aop
-                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+                           http://www.springframework.org/schema/aop/spring-aop.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--注解配置-->
     <context:annotation-config/>
@@ -20,9 +23,9 @@
     <!--切面自动代理-->
     <aop:aspectj-autoproxy/>
 
-    <!--<bean name="userDao" class="com.warthur.spring.demo.dao.impl.UserDAOImpl"/>-->
-    <!--<bean name="userService" class="com.warthur.spring.demo.service.UserService" init-method="init"-->
-    <!--destroy-method="destroy" />-->
+    <!--事务管理器  注解事务使用-->
+    <!--<tx:annotation-driven transaction-manager="txManager"/>-->
+
 
     <!--读取配置文件-->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -35,6 +38,11 @@
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--声明事务的bean对象-->
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <!--spring+hibernate-->
@@ -53,6 +61,24 @@
         </property>
     </bean>
 
+    <!--注解事务配置-->
+    <aop:config>
+        <aop:pointcut id="bussinessService"
+                      expression="execution(public * com.warthur.spring.hibernate.service..*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="bussinessService"/>
+    </aop:config>
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="select*" read-only="true"/>
+            <tx:method name="find*" read-only="true" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+    
     <util:map id="userMap" scope="prototype" map-class="java.util.HashMap"
               key-type="java.lang.String" value-type="java.lang.String">
         <entry key="userName" value="warthur" />

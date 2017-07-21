@@ -2,6 +2,7 @@ package com.warthur.spring.hibernate.dao.Impl;
 
 import com.warthur.spring.hibernate.dao.UserMapper;
 import com.warthur.spring.hibernate.pojo.User;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +19,10 @@ public class UserMapperImpl implements UserMapper {
 
     public void addUser(User user) {
 
-        Session session = sessionFactory.openSession();
-        try {
-            session.beginTransaction();
-            session.save(user);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-        }
+        Session session = sessionFactory.getCurrentSession();
+        session.save(user);
 
         System.out.println("addUser: " + user.getClass());
-
-        // throw new RuntimeException("RuntimeException throwing!");
     }
 
     public void deleteUser(User user) {
