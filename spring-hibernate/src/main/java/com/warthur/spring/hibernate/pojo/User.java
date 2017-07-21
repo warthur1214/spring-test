@@ -1,14 +1,16 @@
 package com.warthur.spring.hibernate.pojo;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by warthur on 17/7/15.
  */
 @Entity
 @Table(name = "t_user")
-public class User {
+public class User implements Serializable {
 
+    private static final long serialVersionUID = 3604460454739437070L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

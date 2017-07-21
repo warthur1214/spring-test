@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,18 +16,25 @@ import org.springframework.stereotype.Repository;
 public class UserMapperImpl implements UserMapper {
 
     @Autowired
+    private HibernateTemplate hibernateTemplate;
+
+    @Autowired
     private SessionFactory sessionFactory;
 
     public void addUser(User user) {
 
-        Session session = sessionFactory.getCurrentSession();
-        session.save(user);
-
+        // Session session = sessionFactory.getCurrentSession();
+        // session.save(user);
         System.out.println("addUser: " + user.getClass());
+        hibernateTemplate.save(user);
+
     }
 
     public void deleteUser(User user) {
+
         System.out.println("deleteUser: " + user.getClass());
+        hibernateTemplate.delete(user);
+
     }
 
     public void close() {

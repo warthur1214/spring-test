@@ -26,6 +26,10 @@ public class UserService {
         throw new RuntimeException("error transaction rollback");
     }
 
+    public void deleteUser(User user) {
+        userMapper.deleteUser(user);
+    }
+
     @PostConstruct
     private void init() {
         System.out.println("UserService class init....");

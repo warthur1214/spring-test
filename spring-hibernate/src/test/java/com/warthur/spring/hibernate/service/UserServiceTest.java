@@ -15,16 +15,22 @@ import java.lang.reflect.Proxy;
  */
 public class UserServiceTest {
 
+    private ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-config.xml");
+
     @Test
     public void addUser() {
 
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-config.xml");
+        UserService service = (UserService) applicationContext.getBean("userService");
+        service.saveUser(new User("wuyongqiang", 27));
+
+        applicationContext.destroy();
+    }
+
+    @Test
+    public void deleteUser() {
 
         UserService service = (UserService) applicationContext.getBean("userService");
-
-        System.out.println(service.getClass());
-
-        service.saveUser(new User("wuyongqiang", 27));
+        service.deleteUser(new User("wuyongqiang", 27));
 
         applicationContext.destroy();
     }
