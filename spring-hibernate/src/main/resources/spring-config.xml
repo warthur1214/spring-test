@@ -78,6 +78,7 @@
             <tx:method name="select*" read-only="true"/>
             <tx:method name="find*" read-only="true" />
             <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" />
             <tx:method name="insert*" propagation="REQUIRED" />
             <tx:method name="update*" propagation="REQUIRED" />
             <tx:method name="delete*" propagation="REQUIRED" />

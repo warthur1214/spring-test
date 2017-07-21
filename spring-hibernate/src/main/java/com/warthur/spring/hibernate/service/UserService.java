@@ -23,10 +23,12 @@ public class UserService {
         System.out.println("******************");
         userMapper.addUser(user);
 
-        throw new RuntimeException("error transaction rollback");
+        // throw new RuntimeException("error transaction rollback");
     }
 
     public void deleteUser(User user) {
+
+        System.out.println("******************");
         userMapper.deleteUser(user);
     }
 

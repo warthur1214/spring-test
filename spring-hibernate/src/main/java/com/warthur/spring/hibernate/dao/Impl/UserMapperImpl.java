@@ -18,8 +18,8 @@ public class UserMapperImpl implements UserMapper {
     @Autowired
     private HibernateTemplate hibernateTemplate;
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    // @Autowired
+    // private SessionFactory sessionFactory;
 
     public void addUser(User user) {
 
@@ -34,10 +34,7 @@ public class UserMapperImpl implements UserMapper {
 
         System.out.println("deleteUser: " + user.getClass());
         hibernateTemplate.delete(user);
-
+        hibernateTemplate.flush();
     }
 
-    public void close() {
-        System.out.println("datasource close.....");
-    }
 }
