@@ -6,24 +6,29 @@ import com.warthur.spring.hibernate.interceptor.LogProxyInterceptor;
 import com.warthur.spring.hibernate.pojo.User;
 import com.warthur.spring.hibernate.service.UserService;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by warthur on 17/7/15.
  */
-public class UserServiceTest {
+@ContextConfiguration("classpath:spring-config.xml")
+public class UserServiceTest extends AbstractJUnit4SpringContextTests {
 
-    private ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-config.xml");
+    @Autowired
+    private UserService service;
 
     @Test
     public void addUser() {
-
-        UserService service = (UserService) applicationContext.getBean("userService");
-        service.saveUser(new User("wuyongqiang", 27));
-
-        applicationContext.destroy();
+        service.saveUser(new User("wuyongqiang1", 27));
     }
 
     @Test
@@ -31,8 +36,6 @@ public class UserServiceTest {
 
         UserService service = (UserService) applicationContext.getBean("userService");
         service.deleteUser(new User("wuyongqiang", 27));
-
-        applicationContext.destroy();
     }
 
     @Test
@@ -47,5 +50,11 @@ public class UserServiceTest {
         System.out.println(userMapperProxy.getClass());
 
         userMapperProxy.deleteUser(new User("wuyongqiang", 27));
+    }
+
+    @Test
+    public void testArrayList() {
+        List<Integer> list = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
+        System.out.println(list);
     }
 }
