@@ -12,5 +12,6 @@
         <module>spring-aop</module>
         <module>spring-ioc</module>
         <module>spring-hibernate</module>
+        <module>spring-mybatis</module>
     </modules>
 </project>

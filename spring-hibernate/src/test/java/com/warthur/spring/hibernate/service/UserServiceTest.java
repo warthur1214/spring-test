@@ -4,11 +4,8 @@ import com.warthur.spring.hibernate.dao.Impl.UserMapperImpl;
 import com.warthur.spring.hibernate.dao.UserMapper;
 import com.warthur.spring.hibernate.interceptor.LogProxyInterceptor;
 import com.warthur.spring.hibernate.pojo.User;
-import com.warthur.spring.hibernate.service.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
