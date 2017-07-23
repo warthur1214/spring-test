@@ -1,4 +1,4 @@
-package com.warthur.spirng.ioc.service;
+package com.warthur.spring.ioc.service;
 
 import com.warthur.spring.ioc.dao.UserDAO;
 import com.warthur.spring.ioc.model.User;
