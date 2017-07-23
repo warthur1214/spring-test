@@ -7,6 +7,5 @@
         SELECT
             user_name AS userName, age
         FROM db_test.t_user
-        WHERE id = ${id}
     </select>
 </mapper>

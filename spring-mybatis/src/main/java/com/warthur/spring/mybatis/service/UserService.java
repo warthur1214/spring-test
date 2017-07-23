@@ -17,4 +17,8 @@ public class UserService {
     public List<UserDTO> getUserList(UserInfo userInfo) {
         return userDAO.selectUserList(userInfo);
     }
+
+    public UserDTO getUserInfoById(UserInfo userInfo) {
+        return userDAO.findUserInfoById(userInfo);
+    }
 }
