@@ -12,6 +12,14 @@
         <spring.version>4.3.7.RELEASE</spring.version>
         <java.version>1.8</java.version>
         <json.version>2.8.6</json.version>
+        <mysql.version>5.1.41</mysql.version>
+        <hibernate.version>5.0.1.Final</hibernate.version>
+        <jpa.version>1.0.0.Final</jpa.version>
+        <dom4j.version>1.6.1</dom4j.version>
+        <antlr.version>2.7.7</antlr.version>
+        <jandex.version>2.0.0.Final</jandex.version>
+        <javassist.version>3.21.0-GA</javassist.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <modules>
@@ -20,5 +28,6 @@
         <module>spring-hibernate</module>
         <module>spring-mybatis</module>
         <module>spring-mvc</module>
+        <module>spring-jpa</module>
     </modules>
 </project>
